@@ -60,12 +60,12 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement delete function in Subscriber repository.`
     -   [x] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
 -   **STAGE 2: Implement services and controllers**
-    -   [ ] Commit: `Create Notification service struct skeleton.`
-    -   [ ] Commit: `Implement subscribe function in Notification service.`
-    -   [ ] Commit: `Implement subscribe function in Notification controller.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification service.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
+    -   [x] Commit: `Create Notification service struct skeleton.`
+    -   [x] Commit: `Implement subscribe function in Notification service.`
+    -   [x] Commit: `Implement subscribe function in Notification controller.`
+    -   [x] Commit: `Implement unsubscribe function in Notification service.`
+    -   [x] Commit: `Implement unsubscribe function in Notification controller.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
 -   **STAGE 3: Implement notification mechanism**
     -   [ ] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
     -   [ ] Commit: `Implement notify function in Notification service to notify each Subscriber.`
@@ -94,5 +94,20 @@ This is the place for you to write reflections:
     Pola Singleton yang memastikan hanya ada satu instance objek yang berjalan tidak cukup untuk menangani masalah thread safety dalam lingkungan multithreading. Pola Singleton memang memastikan bahwa hanya ada satu instance dari hash map yang digunakan di seluruh sistem, tetapi tidak menjamin bahwa akses ke dalamnya aman jika dilakukan oleh banyak thread secara bersamaan. Ini bisa menyebabkan race condition dan inkonsistensi data. Oleh karena itu, penggunaan DashMap tetap diperluka karena selain mendukung akses bersamaan, DashMap juga dirancang untuk menangani concurrent write tanpa menyebabkan deadlock atau kondisi tak terduga lainnya. Dengan demikian, pola Singleton dan DashMap dapat digunakan secara bersamaan: Singleton memastikan hanya ada satu instance dari DashMap, sementara DashMap sendiri memastikan akses data tetap aman di lingkungan yang bersifat paralel.
 
 #### Reflection Publisher-2
+1. In the Model-View Controller (MVC) compound pattern, there is no “Service” and “Repository”. Model in MVC covers both data storage and business logic. Explain based on your understanding of design principles, why we need to separate “Service” and “Repository” from a Model?
+
+    Dalam pola Model-View-Controller (MVC), pemisahan Service dan Repository dari Model sangat penting untuk menerapkan Single Responsibility Principle (SRP). Model sebaiknya hanya berfungsi sebagai representasi data, sementara Repository menangani interaksi dengan penyimpanan data, dan Service mengelola logikanya.
+
+    Dengan memisahkan ketiga komponen ini, kode menjadi lebih modular, mudah dipahami, dan lebih terstruktur. Selain itu, pemisahan ini memungkinkan kita melakukan pengujian unit secara independen pada setiap bagian, meningkatkan fleksibilitas serta skalabilitas sistem tanpa mengganggu komponen lain. Perubahan dalam satu bagian, seperti logika yang ada di NotificationService, tidak akan langsung memengaruhi struktur data dalam Model Notification atau proses penyimpanan dalam SubscriberRepository sehingga pemeliharaan kode menjadi lebih efisien.
+
+2. What happens if we only use the Model? Explain your imagination on how the interactions between each model (Program, Subscriber, Notification) affect the code complexity for each model?
+    Jika seluruh fungsionalitas ditangani dalam Model tanpa pemisahan Service dan Repository, akan ada ketergantungan antar komponen yang tinggi. Model tidak hanya akan mengelola data, tetapi juga logika dan interaksi dengan penyimpanan, yang melanggar prinsip SRP.
+
+    Misalnya, dalam aplikasi yang menangani Program, Subscriber, dan Notification, jika seluruh operasi dilakukan dalam Model, maka perubahan kecil dalam satu Model bisa berdampak luas pada bagian lain. Kompleksitas kode meningkat karena satu Model harus menangani banyak tanggung jawab, seperti yang terlihat pada fungsi subscribe dan unsubscribe di NotificationService. Tanpa pemisahan ini, setiap perubahan dalam sistem akan lebih sulit dikelola dan bisa memperlambat proses development.
+
+3. Have you explored more about Postman? Tell us how this tool helps you to test your current work. You might want to also list which features in Postman you are interested in or feel like it is helpful to help your Group Project or any of your future software engineering projects.
+    Saya telah mengeksplorasi Postman sebagai alat uji API yang sangat membantu dalam menguji endpoint aplikasi web. Dengan Postman, kita bisa melakukan pengujian HTTP request tanpa harus menulis kode tambahan, sehingga mempercepat validasi fungsionalitas aplikasi. 
+
+    Beberapa fitur yang saya anggap sangat berguna dalam Postman antara lain adalah kemampuan Postman untuk menyimpan request dan response, yang memudahkan uji coba berulang tanpa harus mengatur ulang konfigurasi setiap kali pengujian dilakukan. Selain itu, Postman memungkinkan kontrol penuh terhadap header dan body request, sehingga sangat membantu dalam menguji berbagai skenario API. Manajemen cookie juga menjadi fitur penting karena mempermudah pengujian autentikasi dan sesi pengguna. Terakhir, fitur dokumentasi API otomatis memudahkan kolaborasi dalam tim, terutama saat berbagi dokumentasi API dengan anggota lain, seluruh tim dapat memahami bagaimana endpoint bekerja dengan lebih efisien.
 
 #### Reflection Publisher-3
